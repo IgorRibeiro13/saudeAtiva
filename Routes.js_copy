@@ -1,0 +1,115 @@
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+
+
+import Home from './pages/Home';
+import page2 from './pages/page2';
+import page3 from './pages/page3';
+import login from './pages/autentication/login';
+import register from './pages/autentication/register';
+import page6 from './pages/page6';
+import page7 from './pages/page7';
+import Chat from './pages/Chat';
+
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+
+
+const Tab = createBottomTabNavigator();
+const Tab = createStackNavigator();
+const ChatTabBarButton = ({children, onPress}) => (
+  <TouchableOpacity style = {{top: -30, justifyContent: 'center', alignItems: 'center', ...styles.sombra}} onPress = {onPress}>
+    <View style = {{width: 60, height: 60, borderRadius: 30, backgroundColor: "black"}}>
+      {children}
+    </View>
+  </TouchableOpacity>
+ 
+)
+
+
+const Tabs = () => {
+  return (
+
+    
+    
+    
+    <Tab.Navigator tabBarOptions={{
+      showLabel: false, style: {
+        position: 'absolute',
+        elevation: 0,
+        backgroundColor: 'white',
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
+        height: 65,
+        ...styles.sombra
+      }
+    }}>
+      <Tab.Screen name="login" component={login} options={{
+      
+      }} ></Tab.Screen>
+
+      <Tab.Screen name="Calculadora" component={Home} options={{
+        tabBarIcon: ({ focused }) => (
+          <View style={{ alignItems: 'center', justifyContent: 'center', top: 2 }}>
+            <Entypo name="calculator" size={24} color={focused ? '#DB2763' : '#437C90'} />
+            {/*}<Text style={{ color: focused ? '#DB2763' : '#437C90', fontSize: 11, fontWeight: 700 }}>CALCULADORA</Text>{*/}
+          </View>
+        )
+      }} ></Tab.Screen>
+      <Tab.Screen name="Listar" component={page6} options={{
+        tabBarIcon: ({ focused }) => (
+          <View style={{ alignItems: 'center', justifyContent: 'center', top: 2 }}>
+            <AntDesign name="search1" size={24} color={focused ? '#DB2763' : '#437C90'} />
+            {/*}<Text style={{ color: focused ? '#DB2763' : '#437C90', fontSize: 11, fontWeight: 700 }}>LISTAR</Text>{*/}
+          </View>
+        )
+      }} ></Tab.Screen>
+      <Tab.Screen name = "Chat" component={Chat} options={{
+        tabBarIcon: ({ focused }) => (
+          <Ionicons name="chatbubble-ellipses" size={28} color="white" />
+        ),
+        tabBarButton: (props) => (
+          <ChatTabBarButton {... props} />
+        )
+      }}
+      ></Tab.Screen>
+      <Tab.Screen name="?" component={page3} options={{
+        tabBarIcon: ({ focused }) => (
+          <View style={{ alignItems: 'center', justifyContent: 'center', top: 2 }}>
+            <MaterialCommunityIcons name="map-marker-question-outline" size={24} color={focused ? '#DB2763' : '#437C90'} />
+            {/*}<Text style={{ color: focused ? '#DB2763' : '#437C90', fontSize: 11, fontWeight: 700 }}>?</Text>{*/}
+          </View>
+        )
+      }} ></Tab.Screen>
+      <Tab.Screen name="Settings" component={page7} options={{
+        tabBarIcon: ({ focused }) => (
+          <View style={{ alignItems: 'center', justifyContent: 'center', top: 2 }}>
+            <Ionicons name="settings" size={24} color={focused ? '#DB2763' : '#437C90'} />
+            {/*}<Text style={{ color: focused ? '#DB2763' : '#437C90', fontSize: 11, fontWeight: 700 }}>CHAT</Text>{*/}
+          </View>
+        )
+      }} ></Tab.Screen>
+    </Tab.Navigator>
+  )
+}
+
+
+const styles = StyleSheet.create({
+  sombra: {
+    shadowColor: 'blue',
+    shadowOffset: {
+      width: 0,
+      height: 20,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 50,
+  }
+})
+export default Tab;
